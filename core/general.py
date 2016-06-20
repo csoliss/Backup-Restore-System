@@ -141,6 +141,10 @@ def lock_process(_lock_file):
             print((('%s\n') % (_lock_file)))
             sys.exit(0)
             return True
+        else:
+            with open(_lock_file, "w") as lf:
+                lf.write(str(os.getpid()) + '\n')
+            return False
     elif not os.path.isfile(_lock_file):
         #print('if 1')
         with open(_lock_file, "a") as lf:
